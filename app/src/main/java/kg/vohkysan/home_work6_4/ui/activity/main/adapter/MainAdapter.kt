@@ -22,7 +22,7 @@ class MainAdapter : Adapter<MainAdapter.MainVieWHolder>() {
         )
     }
 
-    fun setList(list : List<Item>){
+    fun setList(list: List<Item>) {
         this.listOfItems = list as ArrayList<Item>
     }
 
@@ -41,7 +41,7 @@ class MainAdapter : Adapter<MainAdapter.MainVieWHolder>() {
             with(binding) {
                 imgPreview.loadImage(item.snippet.thumbnails.default.url)
                 tvTitle.text = item.snippet.title
-                tvCountVideos.text = item.contentDetails.toString()
+                tvCountVideos.text = "${item.contentDetails.itemCount} videos series"
             }
         }
     }

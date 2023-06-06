@@ -30,9 +30,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun checkInternet() {
         super.checkInternet()
-        ConnectionLiveData(application).observe(this){
-            with(binding){
-                if (it){
+        ConnectionLiveData(application).observe(this) {
+            with(binding) {
+                if (it) {
                     layoutMainConstraint.visibility = View.VISIBLE
                     layoutInclude.visibility = View.GONE
                 } else {

@@ -10,8 +10,8 @@ interface ApiService {
     @GET("playlists")
     fun getPlaylists(
         @Query("part") part: String,
-        @Query("channelId") channelId : String,
-        @Query("key") key : String,
+        @Query("channelId") channelId: String,
+        @Query("key") key: String,
         @Query("maxResults") maxResults: Int = 10
-    ) : Call<Playlists>
+    ): Call<Playlists>
 }
