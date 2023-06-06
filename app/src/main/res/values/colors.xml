@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="img_playlists_color">#A8A5A5</color>
+    <color name="img_text_videos">#CC000000</color>
+    <color name="no_internet_background">#FF0000</color>
+</resources>
