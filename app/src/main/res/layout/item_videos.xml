@@ -9,7 +9,7 @@
         android:layout_marginTop="16dp"
         android:src="@mipmap/ic_launcher"
         android:layout_marginStart="16dp"
-        android:id="@+id/img_preview"
+        android:id="@+id/img_video"
         android:layout_width="120dp"
         android:layout_height="80dp"
         android:background="@drawable/ic_playlists_img_background"
@@ -17,21 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_text_on_image"
-        android:layout_width="120dp"
-        android:layout_height="24dp"
-        android:background="@drawable/ic_text_on_image_backgound"
-        android:fontFamily="@font/noto_sans"
-        android:paddingStart="54dp"
-        android:paddingTop="2dp"
-        android:text="@string/playlist"
-        android:textColor="@color/white"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/img_preview"
-        app:layout_constraintEnd_toEndOf="@id/img_preview"
-        app:layout_constraintStart_toStartOf="@id/img_preview"
-        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -40,7 +25,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="@font/fjalla_one"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/img_preview"
+        app:layout_constraintStart_toEndOf="@id/img_video"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
@@ -48,9 +33,9 @@
         tools:text="Title text" />
 
     <TextView
-        android:id="@+id/tv_count_videos"
+        android:id="@+id/tv_duration_videos"
         android:layout_width="wrap_content"
-        tools:text="@string/count_of_videos"
+        tools:text="@string/video_time"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"

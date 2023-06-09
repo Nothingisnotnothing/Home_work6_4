@@ -1,4 +1,4 @@
-package kg.vohkysan.home_work6_4.utils
+package kg.vohkysan.home_work6_4.core.utils
 
 import android.annotation.SuppressLint
 import android.app.Application

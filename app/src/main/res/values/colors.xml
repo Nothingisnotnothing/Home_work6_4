@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="img_playlists_color">#A8A5A5</color>
     <color name="img_text_videos">#CC000000</color>
-    <color name="no_internet_background">#FF0000</color>
+    <color name="red">#FF0000</color>
+    <color name="grey">#F6F6F6</color>
 </resources>

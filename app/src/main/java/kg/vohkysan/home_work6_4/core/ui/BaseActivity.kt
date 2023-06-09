@@ -1,11 +1,12 @@
-package kg.vohkysan.home_work6_4.base
+package kg.vohkysan.home_work6_4.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity() {
     protected lateinit var binding: VB
+    protected abstract val viewModel: VM
     protected abstract fun inflateViewBinding(): VB
 
 

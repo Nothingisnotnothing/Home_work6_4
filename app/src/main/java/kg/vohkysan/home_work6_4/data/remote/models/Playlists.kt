@@ -1,4 +1,4 @@
-package kg.vohkysan.home_work6_4.model
+package kg.vohkysan.home_work6_4.data.remote.models
 
 data class Playlists(
     val etag: String,

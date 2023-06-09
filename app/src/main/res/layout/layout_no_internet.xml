@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:text="@string/try_again"
-        android:backgroundTint="@color/no_internet_background"
+        android:backgroundTint="@color/red"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
