@@ -1,4 +1,4 @@
-package kg.vohkysan.home_work6_4.ui.main.adapter
+package kg.vohkysan.home_work6_4.ui.playlists.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

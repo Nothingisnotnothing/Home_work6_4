@@ -11,4 +11,6 @@
     <string name="count_of_videos_series">%s videos series</string>
     <string name="playlist_videos_activity">Playlist</string>
     <string name="back_videos_activity">Back</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
 </resources>

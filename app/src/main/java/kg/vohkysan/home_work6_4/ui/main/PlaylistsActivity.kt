@@ -1,17 +1,16 @@
 package kg.vohkysan.home_work6_4.ui.main
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
-import kg.vohkysan.home_work6_4.ui.main.adapter.PlaylistsAdapter
 import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
 import kg.vohkysan.home_work6_4.data.remote.models.Item
 import kg.vohkysan.home_work6_4.databinding.ActivityPlaylistsBinding
+import kg.vohkysan.home_work6_4.ui.playlists.adapter.PlaylistsAdapter
 import kg.vohkysan.home_work6_4.ui.videos.VideosActivity
 
 /* Второй экран - второй запрос с playlistItems, моделька таже

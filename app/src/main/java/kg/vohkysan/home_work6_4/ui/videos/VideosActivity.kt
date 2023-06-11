@@ -1,7 +1,5 @@
 package kg.vohkysan.home_work6_4.ui.videos
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
