@@ -1,14 +1,49 @@
 package kg.vohkysan.home_work6_4.ui.actual
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.content.Intent
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import kg.vohkysan.home_work6_4.R
+import kg.vohkysan.home_work6_4.core.ui.BaseActivity
+import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
+import kg.vohkysan.home_work6_4.databinding.ActivityActualBinding
+import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity
+import kg.vohkysan.home_work6_4.ui.videos.VideosActivity
 
-class ActualActivity : AppCompatActivity() {
+class ActualActivity : BaseActivity<ActivityActualBinding,ActualViewModel>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_actual)
+    override val viewModel: ActualViewModel by lazy {
+        ViewModelProvider(this)[ActualViewModel::class.java]
+    }
+
+    override fun inflateViewBinding(): ActivityActualBinding {
+        return ActivityActualBinding.inflate(layoutInflater)
+    }
+
+    override fun setUI() {
+        super.setUI()
+        with(binding) {
+            tvTitle.text = intent.getStringExtra(VideosActivity.KEY_FOR_TITLE_VIDEO)
+            tvDescription.text = intent.getStringExtra(VideosActivity.KEY_FOR_DESCRIPTION_VIDEO)
+            tvBack.setOnClickListener {
+                finish()
+                val intent = Intent(this@ActualActivity,PlaylistsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    override fun checkInternet() {
+        super.checkInternet()
+        ConnectionLiveData(application).observe(this) {
+            with(binding) {
+                if (it) {
+                    layoutMainConstraint.visibility = View.VISIBLE
+                    layoutInclude.visibility = View.GONE
+                } else {
+                    layoutMainConstraint.visibility = View.GONE
+                    layoutInclude.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 }

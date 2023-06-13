@@ -6,4 +6,5 @@
     <color name="img_text_videos">#CC000000</color>
     <color name="red">#FF0000</color>
     <color name="grey">#F6F6F6</color>
+    <color name="video_youtube_title">#333333</color>
 </resources>

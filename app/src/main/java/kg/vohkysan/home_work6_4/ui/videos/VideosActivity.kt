@@ -1,5 +1,6 @@
 package kg.vohkysan.home_work6_4.ui.videos
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -9,7 +10,9 @@ import kg.vohkysan.home_work6_4.R
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
 import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
+import kg.vohkysan.home_work6_4.data.remote.models.PlaylistItems
 import kg.vohkysan.home_work6_4.databinding.ActivityVideosBinding
+import kg.vohkysan.home_work6_4.ui.actual.ActualActivity
 import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity
 import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_COUNT_OF_VIDEOS
 import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_DESCRIPTION
@@ -17,7 +20,7 @@ import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_TITL
 import kg.vohkysan.home_work6_4.ui.videos.adapter.VideosAdapter
 
 class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
-    private val adapter = VideosAdapter()
+    private val adapter = VideosAdapter(this::onClick)
 
     override val viewModel: VideosViewModel by lazy {
         ViewModelProvider(this)[VideosViewModel::class.java]
@@ -36,7 +39,34 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
                 getString(R.string.count_of_videos_series),
                 intent.getStringExtra(KEY_FOR_COUNT_OF_VIDEOS)
             )
+            tvBack.setOnClickListener {
+                finish()
+                val intent = Intent(this@VideosActivity, PlaylistsActivity::class.java)
+                startActivity(intent)
+            }
         }
+    }
+
+    override fun checkInternet() {
+        super.checkInternet()
+        ConnectionLiveData(application).observe(this) {
+            with(binding) {
+                if (it) {
+                    layoutMainConstraint.visibility = View.VISIBLE
+                    layoutInclude.visibility = View.GONE
+                } else {
+                    layoutMainConstraint.visibility = View.GONE
+                    layoutInclude.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun onClick(item : PlaylistItems.Item) {
+        val intent = Intent(this@VideosActivity, ActualActivity::class.java)
+        intent.putExtra(KEY_FOR_TITLE_VIDEO, item.snippet.title)
+        intent.putExtra(KEY_FOR_DESCRIPTION_VIDEO, item.snippet.description)
+        startActivity(intent)
     }
 
     override fun setupLiveData() {
@@ -45,6 +75,7 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
             binding.progressBar.isVisible = it
         }
 
+        //добавить сет при возвращении из ActualActivity(пока работает норм, но надо заходить с главной активити)
         intent.getStringExtra(PlaylistsActivity.KEY_FOR_ID)?.let {
             viewModel.getPlaylistItems(it).observe(this) {
                 when (it.status) {
@@ -70,18 +101,7 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
         }
     }
 
-    override fun checkInternet() {
-        super.checkInternet()
-        ConnectionLiveData(application).observe(this) {
-            with(binding) {
-                if (it) {
-                    layoutMainConstraint.visibility = View.VISIBLE
-                    layoutInclude.visibility = View.GONE
-                } else {
-                    layoutMainConstraint.visibility = View.GONE
-                    layoutInclude.visibility = View.VISIBLE
-                }
-            }
-        }
-    }
+    companion object{
+        const val KEY_FOR_TITLE_VIDEO = "title_video"
+        const val KEY_FOR_DESCRIPTION_VIDEO = "description_video"    }
 }

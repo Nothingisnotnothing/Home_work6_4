@@ -7,7 +7,8 @@ import kg.vohkysan.home_work6_4.core.utils.loadImage
 import kg.vohkysan.home_work6_4.data.remote.models.PlaylistItems
 import kg.vohkysan.home_work6_4.databinding.ItemPlaylistBinding
 
-class VideosAdapter : RecyclerView.Adapter<VideosAdapter.MainVieWHolder>() {
+class VideosAdapter(private val onclick: (item: PlaylistItems.Item) -> Unit) :
+    RecyclerView.Adapter<VideosAdapter.MainVieWHolder>() {
     private var listOfItems = arrayListOf<PlaylistItems.Item>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainVieWHolder {
@@ -40,6 +41,9 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.MainVieWHolder>() {
                 imgPreview.loadImage(item.snippet.thumbnails.default.url)
                 tvTitle.text = item.snippet.title
                 //TODO add duration of videos
+                itemView.setOnClickListener {
+                    onclick(item)
+                }
             }
         }
     }

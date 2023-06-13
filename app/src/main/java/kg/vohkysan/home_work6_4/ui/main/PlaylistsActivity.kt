@@ -13,12 +13,6 @@ import kg.vohkysan.home_work6_4.databinding.ActivityPlaylistsBinding
 import kg.vohkysan.home_work6_4.ui.playlists.adapter.PlaylistsAdapter
 import kg.vohkysan.home_work6_4.ui.videos.VideosActivity
 
-/* Второй экран - второй запрос с playlistItems, моделька таже
-* Добавить время видео + координатор: спец топбар, тексты уходят за экран
-* фаб пропадает, количесвто видео закрепляется наверху и скролится ресайклер
-* когда скролим вниз, все возвращается в исходное состояние.
-* */
-
 class PlaylistsActivity : BaseActivity<ActivityPlaylistsBinding, PlaylistsViewModel>() {
     private val adapter = PlaylistsAdapter(this::onNavigate)
 
