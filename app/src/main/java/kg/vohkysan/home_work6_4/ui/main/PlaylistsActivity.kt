@@ -8,22 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
 import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
-import kg.vohkysan.home_work6_4.data.remote.models.Item
+import kg.vohkysan.home_work6_4.data.remote.models.Playlists
 import kg.vohkysan.home_work6_4.databinding.ActivityPlaylistsBinding
 import kg.vohkysan.home_work6_4.ui.playlists.adapter.PlaylistsAdapter
 import kg.vohkysan.home_work6_4.ui.videos.VideosActivity
 
 class PlaylistsActivity : BaseActivity<ActivityPlaylistsBinding, PlaylistsViewModel>() {
-    private val adapter = PlaylistsAdapter(this::onNavigate)
-
-    private fun onNavigate(item : Item) {
-        val intent  = Intent(this@PlaylistsActivity, VideosActivity::class.java)
-        intent.putExtra(KEY_FOR_TITLE, item.snippet.title)
-        intent.putExtra(KEY_FOR_DESCRIPTION, item.snippet.description)
-        intent.putExtra(KEY_FOR_ID, item.id)
-        intent.putExtra(KEY_FOR_COUNT_OF_VIDEOS, item.contentDetails.itemCount.toString())
-        startActivity(intent)
-    }
+    private val adapter = PlaylistsAdapter(this::onNavigateVideos)
 
     override val viewModel: PlaylistsViewModel by lazy {
         ViewModelProvider(this)[PlaylistsViewModel::class.java]
@@ -31,6 +22,15 @@ class PlaylistsActivity : BaseActivity<ActivityPlaylistsBinding, PlaylistsViewMo
 
     override fun inflateViewBinding(): ActivityPlaylistsBinding {
         return ActivityPlaylistsBinding.inflate(layoutInflater)
+    }
+
+    private fun onNavigateVideos(item : Playlists.Item) {
+        val intent  = Intent(this@PlaylistsActivity, VideosActivity::class.java)
+        intent.putExtra(KEY_FOR_TITLE, item.snippet.title)
+        intent.putExtra(KEY_FOR_DESCRIPTION, item.snippet.description)
+        intent.putExtra(KEY_FOR_ID, item.id)
+        intent.putExtra(KEY_FOR_COUNT_OF_VIDEOS, item.contentDetails.itemCount.toString())
+        startActivity(intent)
     }
 
     override fun setupLiveData() {

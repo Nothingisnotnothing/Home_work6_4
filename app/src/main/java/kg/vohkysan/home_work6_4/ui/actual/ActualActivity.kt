@@ -26,8 +26,6 @@ class ActualActivity : BaseActivity<ActivityActualBinding,ActualViewModel>() {
             tvDescription.text = intent.getStringExtra(VideosActivity.KEY_FOR_DESCRIPTION_VIDEO)
             tvBack.setOnClickListener {
                 finish()
-                val intent = Intent(this@ActualActivity,PlaylistsActivity::class.java)
-                startActivity(intent)
             }
         }
     }

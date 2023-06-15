@@ -20,7 +20,7 @@ import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_TITL
 import kg.vohkysan.home_work6_4.ui.videos.adapter.VideosAdapter
 
 class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
-    private val adapter = VideosAdapter(this::onClick)
+    private val adapter = VideosAdapter(this::onNavigateActual)
 
     override val viewModel: VideosViewModel by lazy {
         ViewModelProvider(this)[VideosViewModel::class.java]
@@ -28,6 +28,41 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
 
     override fun inflateViewBinding(): ActivityVideosBinding {
         return ActivityVideosBinding.inflate(layoutInflater)
+    }
+
+    private fun onNavigateActual(item : PlaylistItems.Item) {
+        val intent = Intent(this@VideosActivity, ActualActivity::class.java)
+        intent.putExtra(KEY_FOR_TITLE_VIDEO, item.snippet.title)
+        intent.putExtra(KEY_FOR_DESCRIPTION_VIDEO, item.snippet.description)
+        startActivity(intent)
+    }
+
+    override fun setupLiveData() {
+        super.setupLiveData()
+        viewModel.loading.observe(this) {
+            binding.progressBar.isVisible = it
+        }
+
+        intent.getStringExtra(PlaylistsActivity.KEY_FOR_ID)?.let {
+            viewModel.getPlaylistItems(it).observe(this) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        binding.recyclerView.adapter = adapter
+                        it.data?.let { it1 -> adapter.setList(it1.items)}
+                        viewModel.loading.postValue(false)
+                    }
+
+                    Status.ERROR -> {
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                        viewModel.loading.postValue(false)
+                    }
+
+                    Status.LOADING -> {
+                        viewModel.loading.postValue(true)
+                    }
+                }
+            }
+        }
     }
 
     override fun setUI() {
@@ -41,8 +76,6 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
             )
             tvBack.setOnClickListener {
                 finish()
-                val intent = Intent(this@VideosActivity, PlaylistsActivity::class.java)
-                startActivity(intent)
             }
         }
     }
@@ -57,45 +90,6 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
                 } else {
                     layoutMainConstraint.visibility = View.GONE
                     layoutInclude.visibility = View.VISIBLE
-                }
-            }
-        }
-    }
-
-    private fun onClick(item : PlaylistItems.Item) {
-        val intent = Intent(this@VideosActivity, ActualActivity::class.java)
-        intent.putExtra(KEY_FOR_TITLE_VIDEO, item.snippet.title)
-        intent.putExtra(KEY_FOR_DESCRIPTION_VIDEO, item.snippet.description)
-        startActivity(intent)
-    }
-
-    override fun setupLiveData() {
-        super.setupLiveData()
-        viewModel.loading.observe(this) {
-            binding.progressBar.isVisible = it
-        }
-
-        //добавить сет при возвращении из ActualActivity(пока работает норм, но надо заходить с главной активити)
-        intent.getStringExtra(PlaylistsActivity.KEY_FOR_ID)?.let {
-            viewModel.getPlaylistItems(it).observe(this) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        binding.recyclerView.adapter = adapter
-                        it.data?.let { it1 -> adapter.setList(it1.items)
-                            Log.e("kamino", "success: ${it1.items}", )}
-                        viewModel.loading.postValue(false)
-                    }
-
-                    Status.ERROR -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                        Log.e("kamino", "error: ${it.data}", )
-                        viewModel.loading.postValue(false)
-                    }
-
-                    Status.LOADING -> {
-                        Log.e("kamino", "loading: ${it.data}", )
-                        viewModel.loading.postValue(true)
-                    }
                 }
             }
         }

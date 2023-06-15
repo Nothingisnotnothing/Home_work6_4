@@ -6,14 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import kg.vohkysan.home_work6_4.core.utils.loadImage
 import kg.vohkysan.home_work6_4.data.remote.models.PlaylistItems
 import kg.vohkysan.home_work6_4.databinding.ItemPlaylistBinding
+import kg.vohkysan.home_work6_4.databinding.ItemVideosBinding
 
-class VideosAdapter(private val onclick: (item: PlaylistItems.Item) -> Unit) :
-    RecyclerView.Adapter<VideosAdapter.MainVieWHolder>() {
+class VideosAdapter(private val onNavigateActual: (item: PlaylistItems.Item) -> Unit) :
+    RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
     private var listOfItems = arrayListOf<PlaylistItems.Item>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainVieWHolder {
-        return MainVieWHolder(
-            ItemPlaylistBinding.inflate(
+    fun setList(list: List<PlaylistItems.Item>) {
+        this.listOfItems = list as ArrayList<PlaylistItems.Item>
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosViewHolder {
+        return VideosViewHolder(
+            ItemVideosBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -21,28 +26,23 @@ class VideosAdapter(private val onclick: (item: PlaylistItems.Item) -> Unit) :
         )
     }
 
-    fun setList(list: List<PlaylistItems.Item>) {
-        this.listOfItems = list as ArrayList<PlaylistItems.Item>
-    }
-
     override fun getItemCount(): Int {
         return listOfItems.size
     }
 
-    override fun onBindViewHolder(holder: MainVieWHolder, position: Int) {
+    override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
         holder.bind(listOfItems[position])
     }
 
-    inner class MainVieWHolder(private val binding: ItemPlaylistBinding) :
+    inner class VideosViewHolder(private val binding: ItemVideosBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: PlaylistItems.Item) {
             with(binding) {
                 imgPreview.loadImage(item.snippet.thumbnails.default.url)
                 tvTitle.text = item.snippet.title
-                //TODO add duration of videos
                 itemView.setOnClickListener {
-                    onclick(item)
+                    onNavigateActual(item)
                 }
             }
         }
