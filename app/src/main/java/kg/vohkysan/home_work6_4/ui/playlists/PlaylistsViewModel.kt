@@ -1,4 +1,4 @@
-package kg.vohkysan.home_work6_4.ui.main
+package kg.vohkysan.home_work6_4.ui.playlists
 
 import androidx.lifecycle.LiveData
 import kg.vohkysan.home_work6_4.App.Companion.repository

@@ -22,7 +22,7 @@
             android:name=".ui.videos.VideosActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.PlaylistsActivity"
+            android:name=".ui.playlists.PlaylistsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

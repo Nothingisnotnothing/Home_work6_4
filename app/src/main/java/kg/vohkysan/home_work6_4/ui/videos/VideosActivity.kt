@@ -1,7 +1,6 @@
 package kg.vohkysan.home_work6_4.ui.videos
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -13,10 +12,10 @@ import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
 import kg.vohkysan.home_work6_4.data.remote.models.PlaylistItems
 import kg.vohkysan.home_work6_4.databinding.ActivityVideosBinding
 import kg.vohkysan.home_work6_4.ui.actual.ActualActivity
-import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity
-import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_COUNT_OF_VIDEOS
-import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_DESCRIPTION
-import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity.Companion.KEY_FOR_TITLE
+import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity
+import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity.Companion.KEY_FOR_COUNT_OF_VIDEOS
+import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity.Companion.KEY_FOR_DESCRIPTION
+import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity.Companion.KEY_FOR_TITLE
 import kg.vohkysan.home_work6_4.ui.videos.adapter.VideosAdapter
 
 class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {

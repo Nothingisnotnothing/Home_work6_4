@@ -1,12 +1,10 @@
 package kg.vohkysan.home_work6_4.ui.actual
 
-import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
 import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
 import kg.vohkysan.home_work6_4.databinding.ActivityActualBinding
-import kg.vohkysan.home_work6_4.ui.main.PlaylistsActivity
 import kg.vohkysan.home_work6_4.ui.videos.VideosActivity
 
 class ActualActivity : BaseActivity<ActivityActualBinding,ActualViewModel>() {

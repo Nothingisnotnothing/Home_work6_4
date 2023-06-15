@@ -1,4 +1,4 @@
-package kg.vohkysan.home_work6_4.ui.main
+package kg.vohkysan.home_work6_4.ui.playlists
 
 import android.content.Intent
 import android.view.View
