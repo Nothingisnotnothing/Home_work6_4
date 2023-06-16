@@ -75,10 +75,5 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-fragment:$koin_version"
 
     //ExoPlayer
-    implementation "androidx.media3:media3-exoplayer:1.0.2"
-    implementation "androidx.media3:media3-exoplayer-dash:1.0.2"
-    implementation "androidx.media3:media3-ui:1.0.2"
-
-    //Youtube
-    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.7'
 }

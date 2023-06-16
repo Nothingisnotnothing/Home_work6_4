@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
-import androidx.media3.exoplayer.ExoPlayer
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
 import kg.vohkysan.home_work6_4.R
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
@@ -17,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ActualActivity : BaseActivity<ActivityActualBinding, ActualViewModel>() {
     private lateinit var customAlertDialog: CustomDownloadAlertDialogBinding
-    private lateinit var exoPlayer: ExoPlayer
+    private lateinit var exoPlayer: SimpleExoPlayer
 
     override val viewModel: ActualViewModel by viewModel()
 
@@ -71,10 +73,10 @@ class ActualActivity : BaseActivity<ActivityActualBinding, ActualViewModel>() {
                             tvDescription.text = it.data.items[0].snippet.description
                             //TODO засетить правильное воспроизведение видео которое выбрали,
                             //не получается вообще никак
-                            exoPlayer = ExoPlayer.Builder(this@ActualActivity).build()
+                            exoPlayer = SimpleExoPlayer.Builder(this@ActualActivity).build()
                             videoYoutube.player = exoPlayer
-                            var videoUrl = "https://www.youtube.com/watch?v=${it.data.items[0].id}"
-                            val mediaItem = androidx.media3.common.MediaItem.fromUri(videoUrl)
+                            val videoUrl = "https://www.youtube.com/watch?v=${it.data.items[0].id}"
+                            val mediaItem = MediaItem.fromUri(videoUrl)
                             exoPlayer.setMediaItem(mediaItem)
                             exoPlayer.prepare()
                             exoPlayer.play()
