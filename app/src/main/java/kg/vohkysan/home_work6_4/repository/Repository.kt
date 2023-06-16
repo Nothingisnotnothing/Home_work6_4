@@ -8,6 +8,7 @@ import kg.vohkysan.home_work6_4.data.remote.ApiService
 import kg.vohkysan.home_work6_4.data.remote.RemoteDataSource
 import kg.vohkysan.home_work6_4.data.remote.models.PlaylistItems
 import kg.vohkysan.home_work6_4.data.remote.models.Playlists
+import kg.vohkysan.home_work6_4.data.remote.models.Videos
 import kotlinx.coroutines.Dispatchers
 
 class Repository {
@@ -24,6 +25,12 @@ class Repository {
     fun getPlaylistItems(id:String) : LiveData<Resource<PlaylistItems>> = liveData(Dispatchers.IO) {
         emit(Resource.loading())
         val response = remoteDataSource.getVideosPlaylist(id = id)
+        emit(response)
+    }
+
+    fun getVideo(videoId: String): LiveData<Resource<Videos>> = liveData(Dispatchers.IO){
+        emit(Resource.loading())
+        val response = remoteDataSource.getVideo(videoId)
         emit(response)
     }
 }

@@ -29,10 +29,11 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
         return ActivityVideosBinding.inflate(layoutInflater)
     }
 
-    private fun onNavigateActual(item : PlaylistItems.Item) {
+    private fun onNavigateActual(item: PlaylistItems.Item) {
         val intent = Intent(this@VideosActivity, ActualActivity::class.java)
         intent.putExtra(KEY_FOR_TITLE_VIDEO, item.snippet.title)
         intent.putExtra(KEY_FOR_DESCRIPTION_VIDEO, item.snippet.description)
+        intent.putExtra(KEY_FOR_VIDEO, item.contentDetails.videoId)
         startActivity(intent)
     }
 
@@ -47,7 +48,7 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
                 when (it.status) {
                     Status.SUCCESS -> {
                         binding.recyclerView.adapter = adapter
-                        it.data?.let { it1 -> adapter.setList(it1.items)}
+                        it.data?.let { it1 -> adapter.setList(it1.items) }
                         viewModel.loading.postValue(false)
                     }
 
@@ -73,9 +74,13 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
                 getString(R.string.count_of_videos_series),
                 intent.getStringExtra(KEY_FOR_COUNT_OF_VIDEOS)
             )
-            tvBack.setOnClickListener {
-                finish()
-            }
+        }
+    }
+
+    override fun initClickListener() {
+        super.initClickListener()
+        binding.tvBack.setOnClickListener {
+            finish()
         }
     }
 
@@ -94,7 +99,9 @@ class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
         }
     }
 
-    companion object{
+    companion object {
         const val KEY_FOR_TITLE_VIDEO = "title_video"
-        const val KEY_FOR_DESCRIPTION_VIDEO = "description_video"    }
+        const val KEY_FOR_DESCRIPTION_VIDEO = "description_video"
+        const val KEY_FOR_VIDEO = "video"
+    }
 }
