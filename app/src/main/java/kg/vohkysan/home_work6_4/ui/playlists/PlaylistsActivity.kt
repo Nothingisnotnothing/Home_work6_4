@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
 import kg.vohkysan.home_work6_4.core.utils.ConnectionLiveData
@@ -12,20 +11,20 @@ import kg.vohkysan.home_work6_4.data.remote.models.Playlists
 import kg.vohkysan.home_work6_4.databinding.ActivityPlaylistsBinding
 import kg.vohkysan.home_work6_4.ui.playlists.adapter.PlaylistsAdapter
 import kg.vohkysan.home_work6_4.ui.videos.VideosActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PlaylistsActivity : BaseActivity<ActivityPlaylistsBinding, PlaylistsViewModel>() {
     private val adapter = PlaylistsAdapter(this::onNavigateVideos)
 
-    override val viewModel: PlaylistsViewModel by lazy {
-        ViewModelProvider(this)[PlaylistsViewModel::class.java]
-    }
+    //через ctrl+q выбрать ext koin
+    override val viewModel: PlaylistsViewModel by viewModel()
 
     override fun inflateViewBinding(): ActivityPlaylistsBinding {
         return ActivityPlaylistsBinding.inflate(layoutInflater)
     }
 
-    private fun onNavigateVideos(item : Playlists.Item) {
-        val intent  = Intent(this@PlaylistsActivity, VideosActivity::class.java)
+    private fun onNavigateVideos(item: Playlists.Item) {
+        val intent = Intent(this@PlaylistsActivity, VideosActivity::class.java)
         intent.putExtra(KEY_FOR_TITLE, item.snippet.title)
         intent.putExtra(KEY_FOR_DESCRIPTION, item.snippet.description)
         intent.putExtra(KEY_FOR_ID, item.id)
@@ -74,7 +73,7 @@ class PlaylistsActivity : BaseActivity<ActivityPlaylistsBinding, PlaylistsViewMo
         }
     }
 
-    companion object{
+    companion object {
         const val KEY_FOR_TITLE = "title"
         const val KEY_FOR_DESCRIPTION = "description"
         const val KEY_FOR_ID = "id"

@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <VideoView
+        <androidx.media3.ui.PlayerView
             android:id="@+id/video_youtube"
             android:layout_width="match_parent"
             android:layout_height="240dp"
@@ -58,14 +58,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/video_youtube" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_download"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_donwload_background"
+            android:background="@drawable/ic_download_background"
             android:drawableEnd="@drawable/ic_download"
+            android:paddingEnd="10dp"
             android:text="@string/download"
             android:textColor="@color/red"
             app:layout_constraintStart_toStartOf="parent"

@@ -5,14 +5,14 @@ import kg.vohkysan.home_work6_4.BuildConfig.API_KEY
 import kg.vohkysan.home_work6_4.core.network.BaseDataSource
 import kg.vohkysan.home_work6_4.core.utils.channelId
 import kg.vohkysan.home_work6_4.core.utils.part
+import org.koin.dsl.module
+
+val remoteDataSource = module {
+    factory { RemoteDataSource(get()) }
+}
 
 class RemoteDataSource(private val apiService: ApiService) : BaseDataSource() {
 
-    /**
-     * [getPlaylists] - данный метод возвращает данные запроса.
-     * Метод [getResult] является методом [BaseDataSource], который внутри себя кидает запрос.
-     * Все что нужно сделать тут, это отправить необходимые данные.
-     */
     suspend fun getPlaylists() = getResult {
         apiService.getPlaylists(
             part = part,

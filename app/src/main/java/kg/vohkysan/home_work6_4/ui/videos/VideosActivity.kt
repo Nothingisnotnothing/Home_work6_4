@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import kg.vohkysan.home_work6_4.R
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
@@ -17,13 +16,12 @@ import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity.Companion.KEY_FOR
 import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity.Companion.KEY_FOR_DESCRIPTION
 import kg.vohkysan.home_work6_4.ui.playlists.PlaylistsActivity.Companion.KEY_FOR_TITLE
 import kg.vohkysan.home_work6_4.ui.videos.adapter.VideosAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VideosActivity : BaseActivity<ActivityVideosBinding, VideosViewModel>() {
     private val adapter = VideosAdapter(this::onNavigateActual)
 
-    override val viewModel: VideosViewModel by lazy {
-        ViewModelProvider(this)[VideosViewModel::class.java]
-    }
+    override val viewModel: VideosViewModel by viewModel()
 
     override fun inflateViewBinding(): ActivityVideosBinding {
         return ActivityVideosBinding.inflate(layoutInflater)

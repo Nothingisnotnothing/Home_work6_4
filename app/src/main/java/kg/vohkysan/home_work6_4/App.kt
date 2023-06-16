@@ -1,11 +1,16 @@
 package kg.vohkysan.home_work6_4
 
 import android.app.Application
-import kg.vohkysan.home_work6_4.repository.Repository
+import kg.vohkysan.home_work6_4.di.koinModules
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class App : Application() {
-
-    companion object {
-        val repository = Repository()
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(this@App)
+            modules(koinModules)
+        }
     }
 }
