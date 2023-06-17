@@ -37,28 +37,32 @@ class ActualActivity : BaseActivity<ActivityActualBinding, ActualViewModel>() {
                 finish()
             }
             btnDownload.setOnClickListener {
-                val dialogBuilder = AlertDialog.Builder(this@ActualActivity)
-                    .setView(customAlertDialog.root).create()
-                val actualView = customAlertDialog.root.parent as? ViewGroup
-                actualView?.removeView(customAlertDialog.root)
-
-                customAlertDialog.btnDownload.setOnClickListener {
-                    val qualityOfVideo = when (customAlertDialog.rgQuality.checkedRadioButtonId) {
-                        customAlertDialog.rb1080p.id -> resources.getString(R.string._1080p)
-                        customAlertDialog.rb720p.id -> resources.getString(R.string._720p)
-                        customAlertDialog.rb480p.id -> resources.getString(R.string._480p)
-                        else -> getString(R.string.idk_what_you_want)
-                    }
-                    Toast.makeText(
-                        this@ActualActivity,
-                        "Dowload video with $qualityOfVideo",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    dialogBuilder.dismiss()
-                }
-                dialogBuilder.show()
+                showAlertDialog()
             }
         }
+    }
+
+    fun showAlertDialog(){
+        val dialogBuilder = AlertDialog.Builder(this@ActualActivity)
+            .setView(customAlertDialog.root).create()
+        val actualView = customAlertDialog.root.parent as? ViewGroup
+        actualView?.removeView(customAlertDialog.root)
+
+        customAlertDialog.btnDownload.setOnClickListener {
+            val qualityOfVideo = when (customAlertDialog.rgQuality.checkedRadioButtonId) {
+                customAlertDialog.rb1080p.id -> resources.getString(R.string._1080p)
+                customAlertDialog.rb720p.id -> resources.getString(R.string._720p)
+                customAlertDialog.rb480p.id -> resources.getString(R.string._480p)
+                else -> getString(R.string.idk_what_you_want)
+            }
+            Toast.makeText(
+                this@ActualActivity,
+                "Dowload video with $qualityOfVideo",
+                Toast.LENGTH_SHORT
+            ).show()
+            dialogBuilder.dismiss()
+        }
+        dialogBuilder.show()
     }
 
     override fun setupLiveData() {
