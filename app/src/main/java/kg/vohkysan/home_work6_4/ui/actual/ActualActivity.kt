@@ -8,6 +8,8 @@ import androidx.core.view.isVisible
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import kg.vohkysan.home_work6_4.R
 import kg.vohkysan.home_work6_4.core.network.results.Status
 import kg.vohkysan.home_work6_4.core.ui.BaseActivity
@@ -72,14 +74,14 @@ class ActualActivity : BaseActivity<ActivityActualBinding, ActualViewModel>() {
                             tvTitle.text = it.data?.items!![0].snippet.title
                             tvDescription.text = it.data.items[0].snippet.description
                             //TODO засетить правильное воспроизведение видео которое выбрали,
-                            //не получается вообще никак
-                            exoPlayer = SimpleExoPlayer.Builder(this@ActualActivity).build()
-                            videoYoutube.player = exoPlayer
-                            val videoUrl = "https://www.youtube.com/watch?v=${it.data.items[0].id}"
-                            val mediaItem = MediaItem.fromUri(videoUrl)
-                            exoPlayer.setMediaItem(mediaItem)
-                            exoPlayer.prepare()
-                            exoPlayer.play()
+                            lifecycle.addObserver(videoYoutube)
+                            videoYoutube.addYouTubePlayerListener(object:AbstractYouTubePlayerListener(){
+                                override fun onReady(youTubePlayer: YouTubePlayer) {
+                                    val videoId = it.data.items[0].id
+                                    youTubePlayer.loadVideo(videoId, 0F)
+
+                                }
+                            })
                         }
                         viewModel.loading.postValue(false)
                     }
