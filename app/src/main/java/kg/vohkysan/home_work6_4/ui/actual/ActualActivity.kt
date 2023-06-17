@@ -30,18 +30,6 @@ class ActualActivity : BaseActivity<ActivityActualBinding, ActualViewModel>() {
         return ActivityActualBinding.inflate(layoutInflater)
     }
 
-    override fun initClickListener() {
-        super.initClickListener()
-        with(binding) {
-            tvBack.setOnClickListener {
-                finish()
-            }
-            btnDownload.setOnClickListener {
-                showAlertDialog()
-            }
-        }
-    }
-
     fun showAlertDialog(){
         val dialogBuilder = AlertDialog.Builder(this@ActualActivity)
             .setView(customAlertDialog.root).create()
@@ -63,6 +51,19 @@ class ActualActivity : BaseActivity<ActivityActualBinding, ActualViewModel>() {
             dialogBuilder.dismiss()
         }
         dialogBuilder.show()
+    }
+
+    override fun initClickListener() {
+        super.initClickListener()
+        with(binding) {
+            tvBack.setOnClickListener {
+                finish()
+            }
+            btnDownload.setOnClickListener {
+                showAlertDialog()
+
+            }
+        }
     }
 
     override fun setupLiveData() {
